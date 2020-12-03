@@ -71,6 +71,9 @@ public class ElAulaBot extends TelegramLongPollingBot implements NotificacionBl 
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message = usuarioBl.processUpdate(update);
             try {
+                if(message.getReplyMarkup()!=null){
+                    System.out.println("Falta Menu");
+                }
                 execute(message);
             } catch (TelegramApiException e) {
                 e.printStackTrace();
@@ -79,6 +82,9 @@ public class ElAulaBot extends TelegramLongPollingBot implements NotificacionBl 
             System.out.println(update.getCallbackQuery().getMessage().getText());
             EditMessageText messageText = usuarioBl.processCallBack(update);
             try {
+                if(messageText.getReplyMarkup()!=null){
+                    System.out.println("Falta Menu CALLBACK");
+                }
                 execute(messageText);
             } catch (TelegramApiException e) {
                 e.printStackTrace();
@@ -86,6 +92,9 @@ public class ElAulaBot extends TelegramLongPollingBot implements NotificacionBl 
         }else if(update.getMessage().hasDocument()){
             SendMessage messageDocument = usuarioBl.processDocument(update);
             try{
+                if(messageDocument.getReplyMarkup()!=null){
+                    System.out.println("Falta Menu Doc");
+                }
                 execute(messageDocument);
             }catch (TelegramApiException e){
                 e.printStackTrace();
