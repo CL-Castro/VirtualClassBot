@@ -101,6 +101,8 @@ public class ElAulaBot extends TelegramLongPollingBot implements NotificacionBl 
         return "1292226733:AAH8UbBdv1CZZqQSGMKefgozdVe7nfGR_V8";
     }
 
+
+
     @Override
     public void notificar(List<CursoHasEstudiante> estudiantes, String mensaje) {
         System.out.println(estudiantes);
