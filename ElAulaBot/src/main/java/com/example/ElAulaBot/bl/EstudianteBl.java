@@ -94,6 +94,16 @@ public class EstudianteBl {
         return result;
     }
 
+    public Estudiante findEstudianteById(int id){
+        Estudiante estudiante =this.estudianteRepository.findEstudianteByIdEstudiante(id);
+        if(estudiante != null){
+            return estudiante;
+        }else{
+            LOGGER.info("El usuario no es un estudiante registrado");
+            return null;
+        }
+    }
+
 
 
 

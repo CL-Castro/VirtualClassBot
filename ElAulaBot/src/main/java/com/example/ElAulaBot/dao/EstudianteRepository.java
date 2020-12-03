@@ -9,4 +9,5 @@ public interface EstudianteRepository extends JpaRepository<Estudiante,Integer> 
     List<Estudiante> findAllByStatus(int status);
     Estudiante findEstudianteByChatId(int chatId);
     Estudiante findEstudianteByIdEstudiante(Estudiante estudiante);
+    Estudiante findEstudianteByIdEstudiante(int estudianteId);
 }

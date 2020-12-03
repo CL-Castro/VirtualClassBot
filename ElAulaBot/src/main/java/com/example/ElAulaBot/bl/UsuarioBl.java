@@ -434,6 +434,7 @@ public class UsuarioBl {
                         rowInlineOpcionesCursoProf.add(new InlineKeyboardButton().setText("Subir archivo").setCallbackData("subir archivo;"+select.getIdCurso()));
                         rowInlineOpcionesCursoProf.add(new InlineKeyboardButton().setText("Crear anuncio").setCallbackData("crear anuncio;"+select.getIdCurso()));
                         rowInlineOpcionesCursoProf2.add(new InlineKeyboardButton().setText("Crear examen").setCallbackData("crear examen;"+select.getIdCurso()));
+                        rowInlineOpcionesCursoProf2.add(new InlineKeyboardButton().setText("Ver lista de estudiantes").setCallbackData("ver lista;"+select.getIdCurso()));
 
                         rowsInlineOpcionesCursoProf.add(rowInlineOpcionesCursoProf);
                         rowsInlineOpcionesCursoProf.add(rowInlineOpcionesCursoProf2);
@@ -621,6 +622,24 @@ public class UsuarioBl {
                             chatResponse.setText(s);
                         }
 
+                        break;
+                    case "ver lista":
+                        List<CursoHasEstudiante> cursoHasEstudiantes = cursoEstudianteBl.findAllByIdCurso(cursoBl.findCursoByCursoId(Integer.parseInt(cursos[1])));
+                        String cadena = "Los estudiantes enrolados en el curso " + cursoBl.findCursoByCursoId(Integer.parseInt(cursos[1])).getNombreCurso() + ": ";
+                        cadena += "\n";
+                        int c = 1;
+                        chatResponse = new EditMessageText()
+                                .setChatId(lastMessage.getChatId())
+                                .setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+                        for (CursoHasEstudiante cursoHasEstudiante: cursoHasEstudiantes
+                             ) {
+                            Estudiante estudiante1 = estudianteBl.findEstudianteById(cursoHasEstudiante.getIdEstudiante().getIdEstudiante());
+                            cadena += c + ". " +estudiante1.getPrimerNombreEs() + " " +estudiante1.getPrimerApellidoEs();
+                            System.out.println(estudianteBl.findEstudianteById(cursoHasEstudiante.getIdEstudiante().getIdEstudiante()));
+                            c++;
+                            cadena += "\n";
+                        }
+                        chatResponse.setText(cadena);
                         break;
 
                 }
